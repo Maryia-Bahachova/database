@@ -132,8 +132,8 @@ drop table if exists traveler;
 create table if not exists traveler
 (
   traveler_id serial primary key,
-  full_name varchar(100),
-  phone varchar(20),
+  full_name varchar(100) not null,
+  phone varchar(20) not null unique,
   email varchar(100),
   birth_date date,
   citizenship varchar(50),
@@ -153,7 +153,7 @@ create table if not exists destination
 create table if not exists tour
 (
   tour_id serial primary key,
-  name varchar(100),
+  name varchar(100) not null,
   description text,
   duration_days int,
   base_price numeric(10,2),
@@ -172,11 +172,11 @@ create table if not exists tour_destination
 create table if not exists hotel
 (
   hotel_id serial primary key,
-  name varchar(50),
-  address varchar(100),
+  name varchar(50) not null,
+  address varchar(100) not null,
   max_capacity int,
   stars int,
-  phone varchar(20)
+  phone varchar(20) not null
 );
 
 ----tour_hotel(m:n связь между tour и hotel)
@@ -191,7 +191,7 @@ create table if not exists tour_hotel
 create table if not exists excursion
 (
   excursion_id serial primary key,
-  name varchar(50),
+  name varchar(50) not null,
   description text,
   duration_minutes int,
   price numeric(10,2),
@@ -211,9 +211,9 @@ create table if not exists guide
 (
   guide_id serial primary key,
   supervisor_guide_id int references guide(guide_id) on delete set null,
-  full_name varchar(100),
+  full_name varchar(100) not null,
   languages varchar(100),
-  phone varchar(20),
+  phone varchar(20) not null,
   email varchar(100),
   country varchar(50)
 );
